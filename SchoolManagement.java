@@ -12,12 +12,12 @@ public class SchoolManagement {
 	Playground playground;
 	NoticeBoard noticeBoard;
 
+	// public arrays to store information about school employees and equipments.
 	ArrayList<Classroom> classrooms = new ArrayList<>();
 	ArrayList<Lab> labs = new ArrayList<>();
 	ArrayList<Bus> buses = new ArrayList<>();
 
 	ArrayList<Employee> employees = new ArrayList<>();
-	
 	ArrayList<Equipment> equipments = new ArrayList<>();
 
 	public SchoolManagement(String school_name, String address, String contact_number, String medium_of_study) {
@@ -30,6 +30,8 @@ public class SchoolManagement {
 
 	public boolean isOpen() { return is_open; }
 
+	// chain of setters the pass objects from Main.java
+	// to School management.
 	public void setAuditorium(Auditorium auditorium) {
 		this.auditorium = auditorium;
 	}
@@ -62,6 +64,7 @@ public class SchoolManagement {
 		this.equipments.add(equipment);
 	}
 
+	// basic function to display school details
 	public void schoolDetails() {
 		System.out.println("School Name: " + school_name);
 		System.out.println("Address: " + address);

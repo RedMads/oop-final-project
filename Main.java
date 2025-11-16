@@ -3,16 +3,21 @@ import java.util.ArrayList;
 
 public class Main {
 
+    // Useful global variables :P !
     static ArrayList<Student> students = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
+    
+    // global object that stores the current school
+    // so all the functions down there can access functions
+    // like addBus and NoticeBoard object etc...
+    static SchoolManagement current_school = null;
 
-    static SchoolManagement currentSchool = null;
-
+    // handles string inputs (shortcut for displaying prompts).
     public static String readLine(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine().trim();
     }
-
+    // handles integer inputs and loops until the value is integer.
     public static int readInt(String prompt) {
         while (true) {
             String s = readLine(prompt);
@@ -23,7 +28,9 @@ public class Main {
             }
         }
     }
-
+    // this function handles reading when the type of input is double
+    // only double value if it otherwise it will loop and display error msg
+    // until the value is double.
     public static double readDouble(String prompt) {
         while (true) {
             String s = readLine(prompt);
@@ -34,16 +41,14 @@ public class Main {
             }
         }
     }
-
+    // basic function to handle inputs when student information are required.
     public static Student registerStudent() {
         String name = "";
         int class_id = 0;
         int section = 0;
         int bus_id = 0;
 
-        System.out.print("Student name: ");
-        name = scanner.nextLine();
-        
+        name = readLine("Student name: ");
         class_id = readInt("class id: ");
 
         section = readInt("Section: ");
@@ -51,7 +56,7 @@ public class Main {
 
         return new Student(students.size() + 1, name, class_id, section, bus_id);    
     }
-
+    // Function studentMenu display a menu of student option and process input.
 	public static void studentMenu() 
     {   
         clearScreen();
@@ -93,7 +98,8 @@ public class Main {
             }
         } 
     }
-
+    // display management menu (main menu of the program)
+    // handle inputs and treat them as string to prevent missmatch types craches.
 	public static void schoolManagementMenu() 
     {
         clearScreen();
@@ -133,8 +139,8 @@ public class Main {
                     case "f": // Auditorium
                         auditoriumMenu();
                         break;
-                    case "g": // show School Details
-                        currentSchool.schoolDetails();
+            case "g": // show School Details
+                current_school.schoolDetails();
                         break;
                     case "h":
                         System.exit(0);
@@ -143,7 +149,7 @@ public class Main {
                 }
             }
 	}
-
+    // Function auditoriumMenu display a menu of auditorium option and process input.
     public static void auditoriumMenu() {
         clearScreen();
         System.out.println("=".repeat(30));
@@ -177,7 +183,7 @@ public class Main {
         }
     }
 
-
+    // Function noticeBoardMenu display a menu of notice board option and process input.
     public static void noticeBoardMenu() 
     {
         clearScreen();
@@ -194,12 +200,12 @@ public class Main {
 
             switch (option) {
                 case "1":
-                    currentSchool.noticeBoard.display();
+                    current_school.noticeBoard.display();
                     break;
                 case "2":
                     String new_content = readLine("Enter text: ");
-                    currentSchool.noticeBoard.addContent(new_content);
-                    System.out.println("Successfully added with ID: " + currentSchool.noticeBoard.news_list.indexOf(new_content));
+                    current_school.noticeBoard.addContent(new_content);
+                    System.out.println("Successfully added with ID: " + current_school.noticeBoard.news_list.indexOf(new_content));
                     break;
                 case "3":
                     schoolManagementMenu();
@@ -209,7 +215,7 @@ public class Main {
             }
         }
     }
-
+    // Function classMenu display a menu of Class option and process input.
     public static void classMenu() 
     {
         clearScreen();
@@ -233,7 +239,7 @@ public class Main {
                     System.out.println("Assign teacher functionality...");
                     break;
                 case "3":
-                    for(Classroom c: currentSchool.classrooms)
+                    for(Classroom c: current_school.classrooms)
                         c.classDetails();
                     break;
                 case "4":
@@ -245,7 +251,7 @@ public class Main {
         }
     }
 
-
+    // Function busMenu display a menu of Bus option and process input.
 	public static void busMenu() 
     {   
         clearScreen();
@@ -263,16 +269,16 @@ public class Main {
 
                 switch (option) 
                 {
-                    case "1": 
-                            Bus new_bus = createNewBus("BUS-" + readLine("Bus id: "));
-                            currentSchool.addBus(new_bus);
+            case "1": 
+                Bus new_bus = createNewBus("BUS-" + readLine("Bus id: "));
+                current_school.addBus(new_bus);
                         break;
                     case "2":
-                        for(Bus bus: currentSchool.buses)
+                        for(Bus bus: current_school.buses)
                             bus.busDetails();
                         break;
                     case "3":
-                        for(Bus bus: currentSchool.buses)
+                        for(Bus bus: current_school.buses)
                             bus.showSeats();
                         break;
                     case "4":
@@ -283,7 +289,7 @@ public class Main {
                 }
         }
 	}
-
+    // Function employeeMenu display a menu of Employee option and process input.
 	public static void employeeMenu() 
     {   
         clearScreen();
@@ -314,6 +320,7 @@ public class Main {
         }
 	}
 
+    // Function teacherMenu display a menu of teacher option and process input.
 	public static void teacherMenu() 
     {
         clearScreen();
@@ -331,7 +338,7 @@ public class Main {
 
             switch (option) {
                 case "1": 
-                    for(Employee e: currentSchool.employees)
+                    for(Employee e: current_school.employees)
                         if (e.employee_id.startsWith("EMP-"))
                             e.employeeDetails();
                     break;
@@ -347,6 +354,7 @@ public class Main {
         }
 	}
 
+    // Function supportStaffMenu display a menu of support staff option and process input.
     public static void supportStaffMenu() {
         clearScreen();
         System.out.println("=".repeat(30));
@@ -362,7 +370,7 @@ public class Main {
 
             switch (option) {
                 case "1":
-                    for(Employee e: currentSchool.employees)
+                    for(Employee e: current_school.employees)
                         if (e.employee_id.startsWith("STA-"))
                             e.employeeDetails();
                     break;
@@ -378,15 +386,20 @@ public class Main {
         }
     }
 
-
+    // Simple function to clear the screen when
+    // the user interact with menu options.
     public static void clearScreen() {
-        // ANSI escape code to clear the console
+
+        // code to clear the screen
         System.out.print("\033[H\033[2J");
 
         // Reset the cursor to the top-left corner
         System.out.flush();
     }
 
+    // crateSchool function creates and initialize components
+    // of the school with values entered by user, and then
+    // passes the objects to SchoolManagement object (current_school).
     public static SchoolManagement createSchool() {
       
         String school_name = "";
@@ -404,19 +417,19 @@ public class Main {
         SchoolManagement school = new SchoolManagement(school_name, address, contact_number, medium_of_study);
 
         // Create Auditorium
-        int auditoriumSeats = readInt("Number of seats in Auditorium: ");
-        Auditorium auditorium = new Auditorium(auditoriumSeats, 0, "", null, "");
+        int auditorium_seats = readInt("Number of seats in Auditorium: ");
+        Auditorium auditorium = new Auditorium(auditorium_seats, 0, "", null, "");
         school.setAuditorium(auditorium);
 
         // Create Playground
-        double playgroundArea = readDouble("Playground area/size (numeric): ");
-        Playground playground = new Playground(playgroundArea, "");
+        double playground_area = readDouble("Playground area/size (numeric): ");
+        Playground playground = new Playground(playground_area, "");
         school.setPlayground(playground);
 
         // Classrooms
-        int classCount = readInt("How many classrooms to create?: ");
+        int class_count = readInt("How many classrooms to create?: ");
 
-        for (int i = 1; i <= classCount; i++) {
+        for (int i = 1; i <= class_count; i++) {
 
             System.out.println("== Classroom " + i + " ==");
             String class_id = readLine("Class ID: ");
@@ -425,102 +438,117 @@ public class Main {
             String teacher_id = readLine("Teacher ID: ");
             int student_count = readInt("Student count: ");
 
-            int benchcount = readInt("Bench count: ");
-            int fancount = readInt("Fan count: ");
-            int lightcount = readInt("Light count: ");
+            int bench_count = readInt("Bench count: ");
+            int fan_count = readInt("Fan count: ");
+            int light_count = readInt("Light count: ");
 
-            String equipmentId = "EQ-" + i;
+            String equipment_id = "EQ-" + i;
 
-            ClassEquipment ce = new ClassEquipment(equipmentId, 0.0, class_id, benchcount, fancount, lightcount);
+            // Initialize ClassEquipment object and add it to school object.
+            ClassEquipment ce = new ClassEquipment(equipment_id, 0.0, class_id, bench_count, fan_count, light_count);
             school.addEquipment(ce);
-
-            Classroom classroom = new Classroom(class_id, class_name, teacher_id, student_count, equipmentId);
+            
+            // Initialize ClassRoom object and add it to school object.
+            Classroom classroom = new Classroom(class_id, class_name, teacher_id, student_count, equipment_id);
             school.addClassroom(classroom);
         }
 
         // Labs
-        int labCount = readInt("How many labs to create?: ");
-        int labEquipCounter = 1;
+        int lab_count = readInt("How many labs to create?: ");
+        int lab_equip_counter = 1;
 
-        for (int i = 1; i <= labCount; i++) {
+        for (int i = 1; i <= lab_count; i++) {
 
             System.out.println("== Lab " + i + " ==");
             String labName = readLine("Lab name: ");
 
-            String incharge = readLine("Incharge ID (or leave blank): ");
-            int labEquipCount = readInt("How many different lab equipments for this lab? ");
+            String incharge = readLine("Incharge ID: ");
+            int lab_equip_count = readInt("How many different lab equipments for this lab? ");
+            
+            // create array to store Equipment id's.
+            ArrayList<String> created_eq_ids = new ArrayList<>();
 
-            ArrayList<String> createdEqIds = new ArrayList<>();
+            for (int j = 1; j <= lab_equip_count; j++) {
+                String eq_name = readLine("Equipment name: ");
+                double eq_cost = readDouble("Equipment cost: ");
 
-            for (int j = 1; j <= labEquipCount; j++) {
-                String eqName = readLine("Equipment name: ");
-                int eqCount = readInt("Equipment count: ");
-                String eqId = "LEQ-" + (labEquipCounter++);
+                int eq_count = readInt("Equipment count: ");
+                String eq_id = "LEQ-" + (lab_equip_counter++);
 
-                LabEquipment le = new LabEquipment(eqId, 0.0, eqName, eqCount);
-                school.addEquipment(le);
-                createdEqIds.add(eqId);
+                // create lab equipment object.
+                LabEquipment lab_eq = new LabEquipment(eq_id, eq_count * eq_cost, eq_name, eq_count);
+                school.addEquipment(lab_eq);
+                created_eq_ids.add(eq_id);
             }
 
-            String combinedEqId = String.join(";", createdEqIds);
-            Lab lab = new Lab("L-" + i, incharge, labName, combinedEqId);
+            // combine all id's and seperate them with ; to be clear.
+            String combined_eq_id = String.join(";", created_eq_ids);
+            // create lab object and pass it to school object.
+            Lab lab = new Lab("L-" + i, incharge, labName, combined_eq_id);
             school.addLab(lab);
         }
 
         // Employees: Teachers
-        int teacherCount = readInt("How many Teachers? ");
-        int empCounter = 1;
-        for (int i = 1; i <= teacherCount; i++) {
+        int teacher_count = readInt("How many Teachers? ");
+        int emp_counter = 1;
+        for (int i = 1; i <= teacher_count; i++) {
             System.out.println("== Teacher " + i + " ==");
 
             String name = readLine("Name: ");
             double salary = readDouble("Salary: ");
 
-            String departmentID = readLine("Department ID: ");
-            String empId = "EMP-" + (empCounter++);
-
-            Teacher t = new Teacher(empId, name, salary, departmentID, "");
+            String department_id = readLine("Department ID: ");
+            String emp_id = "EMP-" + (emp_counter++);
+            
+            // create Teacher object and pass it to school object.
+            Teacher t = new Teacher(emp_id, name, salary, department_id, "");
             school.addEmployee(t);
         }
 
         // Employees: Support Staff
-        int staffCount = readInt("How many Support Staff? ");
+        int staff_count = readInt("How many Support Staff? ");
 
-        for (int i = 1; i <= staffCount; i++) {
+        for (int i = 1; i <= staff_count; i++) {
             System.out.println("== Support Staff " + i + " ==");
 
             String name = readLine("Name: ");
             double salary = readDouble("Salary: ");
 
-            String departmentID = readLine("Department ID: ");
-            String empId = "STA-" + (empCounter++);
-            SupportStaff s = new SupportStaff(empId, name, salary, departmentID, "");
+            String department_id = readLine("Department ID: ");
+            String emp_id = "STA-" + (emp_counter++);
+
+            // create new staff object and pass it to school object.
+            SupportStaff s = new SupportStaff(emp_id, name, salary, department_id, "");
             school.addEmployee(s);
         }
 
-        // Buses
-        int busCount = readInt("How many buses to create?: ");
-        int busCounter = 1;
+        // Initialize bus infortmation
+        int bus_count = readInt("How many buses to create?: ");
+        int bus_counter = 1;
 
-        for (int i = 1; i <= busCount; i++) {
+        for (int i = 1; i <= bus_count; i++) {
             System.out.println("== Bus " + i + " ==");
-            String bus_id = "BUS-" + (busCounter++);
+            String bus_id = "BUS-" + (bus_counter++);
             
+            // create bus object and pass it to school object.
             Bus new_bus = createNewBus(bus_id);
             school.addBus(new_bus);
         }
 
-        // NoticeBoard
-        int newsCount = readInt("How many initial notices for NoticeBoard? ");
-        ArrayList<String> newsList = new ArrayList<>();
+        // create NoticeBoard news list
+        int news_count = readInt("How many initial notices for NoticeBoard? ");
+        ArrayList<String> news_list = new ArrayList<>();
 
-        for (int i = 1; i <= newsCount; i++) {
+        // create news and add them to news_list array
+        for (int i = 1; i <= news_count; i++) {
             String content = readLine("Notice " + i + " text: ");
-            newsList.add(content);
+            news_list.add(content);
         }
 
-        String nbIncharge = readLine("NoticeBoard incharge name: ");
-        NoticeBoard nb = new NoticeBoard(newsList, nbIncharge);
+        String nb_incharge = readLine("NoticeBoard incharge name: ");
+
+        // create NoticeBoard object and pass it to school management object.
+        NoticeBoard nb = new NoticeBoard(news_list, nb_incharge);
         school.setNoticeBoard(nb);
 
         System.out.println("\nSchool created successfully.");
@@ -533,12 +561,11 @@ public class Main {
         String driver_id = readLine("Driver ID: ");
         String bus_number = readLine("Bus number: ");
         int capacity = readInt("Bus capacity: ");
-
-        int areaCount = readInt("How many areas does this bus cover?: ");
+    int area_count = readInt("How many areas does this bus cover?: ");
         ArrayList<String> areas = new ArrayList<>();
 
-        for (int j = 1; j <= areaCount; j++) {
-                String area = readLine("Area " + j + " name: ");
+    for (int j = 1; j <= area_count; j++) {
+        String area = readLine("Area " + j + " name: ");
                 areas.add(area);
         } 
 
@@ -549,7 +576,7 @@ public class Main {
     { 
         // create school (initial setup)
         SchoolManagement school = createSchool();
-        currentSchool = school;
+        current_school = school;
 
         // start interactive menu
         schoolManagementMenu();
