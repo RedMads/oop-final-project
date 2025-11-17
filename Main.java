@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Date; //sets its values for the variable*
+
 
 public class Main {
 

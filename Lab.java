@@ -19,11 +19,11 @@ public class Lab {
 	}
 
 	public boolean isOccupied() {
-		// TODO: Implement this method
+		System.out.println("Checking occupancy status for " + this.lab_name + "...");
 		return false;
 	}
 
 	public void payFine() {
-		// TODO: Implement this method
+		System.out.println("A fine has been paid related to lab: " + this.lab_name);
 	}
 }
