@@ -14,6 +14,7 @@ public class Department {
 	}
 
 	public void departmentDetails() {
+		
 		System.out.println("Department ID: " + department_id);
 		System.out.println("Department Name: " + department_name);
 		System.out.println("Incharge Name: " + incharge_name);

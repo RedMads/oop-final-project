@@ -6,6 +6,9 @@ public class Student {
 	int section;
 	int bus_id;
 
+	public static final double BASE_FEE = 5000.00;
+
+
 	public Student(int student_id, String student_name, int class_id, int section, int bus_id) 
 	{
 		this.student_id = student_id;
@@ -28,7 +31,14 @@ public class Student {
 
 	public void payFees() 
 	{
-
+		double fee = BASE_FEE;
+		
+		System.out.println("\n" + "=".repeat(30));
+        System.out.println("--- Standard Fee Payment ---");
+        System.out.println("Student: " + student_name + " (ID: " + student_id + ")");
+        System.out.println("Tuition Fee: $" + fee);
+        System.out.println("Payment processed successfully for Standard Fee.");
+        System.out.println("=".repeat(30));
 	}
 }
 

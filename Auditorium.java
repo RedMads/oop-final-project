@@ -43,6 +43,6 @@ public class Auditorium {
         System.out.println("Total Seats: t" + this.total_seats);
         System.out.println("Occupied: t" + this.seats_occupied);
         System.out.println("Available: t" + available_seats);
-        System.out.println("-----");
+       System.out.println("=".repeat(30));
 	}
 }
