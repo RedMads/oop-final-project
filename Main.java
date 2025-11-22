@@ -1,7 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Date; //sets its values for the variable*
-
 
 public class Main {
 
@@ -72,7 +70,6 @@ public class Main {
 
         while(true)
         {   
-            
             String option = readLine("> ");
 
             switch (option) {
@@ -168,13 +165,31 @@ public class Main {
 
             switch (option) {
                 case "1":
-                    System.out.println("Book auditorium functionality...");
+                    while (true) {
+                        String event_name = readLine("Enter event name: ");
+                        int booked_seats = readInt("Enter number of booked seats: ");
+                        String event_date = readLine("Enter event date ( DD/MM/YYYY ): ");
+                        String event_time = readLine("Enter event time ( HH:MM ): ");
+
+                        try {
+                            current_school.auditorium.bookAuditorium(booked_seats, event_name, event_date, event_time);
+                            break; // exit loop
+                        } catch(NotEnoughSeats e) {
+                            System.out.println(e.getMessage());
+                            continue;
+                        }            
+                    }
                     break;
                 case "2":
-                    System.out.println("Show event details functionality...");
+
+                    if (current_school.auditorium.event_name == null)
+                        System.out.println("There is no events.");
+                    else
+                        current_school.auditorium.eventDetails();
+                    
                     break;
                 case "3":
-                    System.out.println("Show total and occupied seats functionality...");
+                    current_school.auditorium.displaySeats();
                     break;
                 case "4":
                     schoolManagementMenu();
@@ -304,7 +319,6 @@ public class Main {
 
         while(true)
         {
-
             String option = readLine("> ");
             switch (option) {
                 case "1": 
@@ -420,7 +434,7 @@ public class Main {
 
         // Create Auditorium
         int auditorium_seats = readInt("Number of seats in Auditorium: ");
-        Auditorium auditorium = new Auditorium(auditorium_seats, 0, "", null, "");
+        Auditorium auditorium = new Auditorium(auditorium_seats);
         school.setAuditorium(auditorium);
 
         // Create Playground
