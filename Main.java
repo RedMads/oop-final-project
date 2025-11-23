@@ -216,80 +216,40 @@ public class Main {
         }
     }
     // Function classMenu display a menu of Class option and process input.
-public static void classMenu() 
-{
-    clearScreen();
-    System.out.println("=".repeat(30));
-    System.out.println("Management > Class\n");
-    System.out.println("1- Add Students (by StudentID)");
-    System.out.println("2- Assign Teacher (by TeacherID)");
-    System.out.println("3- Show Details");
-    System.out.println("4- Go back");
-    System.out.println("=".repeat(30));
+ public static void classMenu() 
+    {
+        clearScreen();
+        System.out.println("=".repeat(30));
+        System.out.println("Management > Class\n");
+        System.out.println("1- Add Students (by StudentID)");
+        System.out.println("2- Assign Teacher (by TeacherID)");
+        System.out.println("3- Show Details");
+        System.out.println("4- Go back");
+        System.out.println("=".repeat(30));
 
-    while (true) {
+        while (true) {
 
-        String option = readLine("> ");
+            String option = readLine("> ");
 
-        switch (option) {
-
-            case "1":
-                System.out.println("Add student functionality...");
-                break;
-
-            case "2":
-            {
-                for (Classroom c : current_school.classrooms) {
-                    c.classDetails();
-                    c.teacher_id = ""; // new teacher id.
-                }
-
-                // take user input
-                int classId = readInt("Enter Class ID to assign a teacher: ");
-                Classroom selectedClass = current_school.getClassById(classId);
-
-                if (selectedClass == null) {
-                    System.out.println("Class not found.");
-                    break; 
-                }
-
-                // check if teacher id exists
-                System.out.println("Available Teachers:");
-                for (Employee t : current_school.employees) {
-                    t.showDetails();
-                }
-
-                String teacherId = readLine("Enter Teacher ID: ");
-                Employee teacher = current_school.getTeacherById(teacherId);
-
-                if (teacher == null) {
-                    System.out.println("Teacher not found.");
-                    break; 
-                }
-
-                // assign teacher to the class room
-                selectedClass.assignTeacher(teacher.employee_id);
-                System.out.println("Teacher assigned successfully!");
-                System.out.println("Assign teacher functionality...");
-                break;
-            } // نهاية الأقواس الخاصة بـ case "2"
-
-            case "3":
-                for (Classroom c : current_school.classrooms)
-                    c.classDetails();
-                break;
-
-            case "4":
-                schoolManagementMenu();
-                break;
-
-            default:
-                System.out.println("Invalid option. Please select between 1 and 4.");
-                break;
-        } 
-    } 
-} 
-
+            switch (option) {
+                case "1":
+                    System.out.println("Add student functionality...");
+                    break;
+                case "2":
+                    System.out.println("Assign teacher functionality...");
+                    break;
+                case "3":
+                    for(Classroom c: current_school.classrooms)
+                        c.classDetails();
+                    break;
+                case "4":
+                    schoolManagementMenu();
+                    break;
+                default:
+                    System.out.println("Invalid option. Please select between 1 and 4.");
+            }
+        }
+    }
 	
     // Function busMenu display a menu of Bus option and process input.
 	public static void busMenu() 
@@ -361,7 +321,7 @@ public static void classMenu()
 	}
 
     // Function teacherMenu display a menu of teacher option and process input.
-	public static void teacherMenu() 
+public static void teacherMenu() 
     {
         clearScreen();
 		System.out.println("=".repeat(30));
@@ -395,7 +355,7 @@ public static void classMenu()
 	}
 
     // Function supportStaffMenu display a menu of support staff option and process input.
-    public static void supportStaffMenu() {
+   public static void supportStaffMenu() {
         clearScreen();
         System.out.println("=".repeat(30));
         System.out.println("Mangement > Employee > Support Staff\n");
@@ -425,6 +385,18 @@ public static void classMenu()
             }
         }
     }
+
+    // Simple function to clear the screen when
+    // the user interact with menu options.
+    public static void clearScreen() {
+
+        // code to clear the screen
+        System.out.print("\033[H\033[2J");
+
+        // Reset the cursor to the top-left corner
+        System.out.flush();
+    }
+
 
     // Simple function to clear the screen when
     // the user interact with menu options.
