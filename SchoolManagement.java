@@ -28,6 +28,19 @@ public class SchoolManagement {
 		this.is_open = true;
 	}
 
+	// useful function to list all employees by tag
+	// id_prefix = STA- ; will list only staffs.
+	// id_prefix = EMP- ; will list only teachers.
+	public void displayEmployeesDetailsByPrefix(String id_prefix) {
+
+		if (!id_prefix.equals("STA-") && !id_prefix.equals("EMP-"))
+			System.out.println("Unknown id prefix.");
+
+		for(Employee e: this.employees)
+            if (e.employee_id.startsWith(id_prefix))
+                e.employeeDetails();	
+	}
+
 	public boolean isOpen() { return is_open; }
 
 	// chain of setters the pass objects from Main.java

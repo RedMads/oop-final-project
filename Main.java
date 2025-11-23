@@ -186,7 +186,7 @@ public class Main {
                         System.out.println("There is no events.");
                     else
                         current_school.auditorium.eventDetails();
-                    
+
                     break;
                 case "3":
                     current_school.auditorium.displaySeats();
@@ -253,6 +253,15 @@ public class Main {
                     System.out.println("Add student functionality...");
                     break;
                 case "2":
+
+                    for (Classroom c: current_school.classrooms) {
+                        c.classDetails();
+                        c.teacher_id = ""; // new teacher id.
+                    }
+                    // take user input
+                    // check if teacher id exists
+                    // assign teacher to the class room .
+                        
                     System.out.println("Assign teacher functionality...");
                     break;
                 case "3":
@@ -354,12 +363,23 @@ public class Main {
 
             switch (option) {
                 case "1": 
-                    for(Employee e: current_school.employees)
-                        if (e.employee_id.startsWith("EMP-"))
-                            e.employeeDetails();
+
+                    // list 
+                    current_school.displayEmployeesDetailsByPrefix("EMP-");
+                    
                     break;
                 case "2":
-                    System.out.println("Receiving Salary functionality...");
+                    // list all teachers.
+                    current_school.displayEmployeesDetailsByPrefix("EMP-");
+
+                    option = readLine("Enter teacher id: ");
+
+                    // todo: take user input and check if the provided id is corresponding to
+                    // real teacher or not if not display error message and let user try again.
+
+                    for(Employee e: current_school.employees)
+                        e.receiveSalary();
+                    
                     break;
                 case "3":
                     employeeMenu();
@@ -386,12 +406,25 @@ public class Main {
 
             switch (option) {
                 case "1":
-                    for(Employee e: current_school.employees)
-                        if (e.employee_id.startsWith("STA-"))
-                            e.employeeDetails();
+                    current_school.displayEmployeesDetailsByPrefix("STA-");
                     break;
                 case "2":
-                    System.out.println("Receive salary functionality...");
+                    current_school.displayEmployeesDetailsByPrefix("STA-");
+
+                    while (true) {
+
+                        int employee_id = readInt("choose Employee by id\n > ");
+
+                        if (employee_id > current_school.employees.size() || employee_id < 0){
+                            System.out.println("invaild Employee id !");
+                            continue;
+                        }
+                        else {
+                            current_school.employees.get(employee_id).receiveSalary();
+                            break;
+                        }
+                    }
+
                     break;
                 case "3":
                     schoolManagementMenu();
@@ -485,6 +518,8 @@ public class Main {
             ArrayList<String> created_eq_ids = new ArrayList<>();
 
             for (int j = 1; j <= lab_equip_count; j++) {
+                
+                System.out.println("== Equipment  " + i + " ==");
                 String eq_name = readLine("Equipment name: ");
                 double eq_cost = readDouble("Equipment cost: ");
 
