@@ -21,12 +21,12 @@ public class Employee {
 	}
 
 	public void checkIn() {
-		// TODO: Implement this method
-	}
-
+		System.out.println("Employee " + this.employee_name + " (ID: " + this.employee_id + ") has checked in.");
+    }
+	
 	public void receiveSalary() {
-		// TODO: Implement this method
-	}
+		System.out.println("Salary of " + this.salary + " has been paid to " + this.employee_name + ".");
+    }
 }
 
 class Teacher extends Employee {

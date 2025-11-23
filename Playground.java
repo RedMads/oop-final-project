@@ -13,7 +13,7 @@ public class Playground {
 	}
 
 	public boolean isOccupied() {
-		// TODO: Implement this method
+		System.out.println("Checking if playground (Area: " + this.area + ") is occupied...");
 		return false;
 	}
 }

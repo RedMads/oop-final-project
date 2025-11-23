@@ -13,11 +13,11 @@ public class Equipment {
 	}
 
 	public void purchaseEquipment() {
-		// TODO: Implement this method
+		System.out.println("Purchasing equipment ID: " + this.equipment_id + " for " + this.cost);
 	}
 
 	public void repair() {
-		// TODO: Implement this method
+		System.out.println("Equipment ID: " + this.equipment_id + " is now undergoing repairs.");
 	}
 }
 
