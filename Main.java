@@ -87,7 +87,10 @@ public class Main {
 
                     break;
                 case "3":
-                    System.out.println("Paying Fee functionality...");
+                    // for all students to pay fees
+                    for(Student st: students)
+                        st.payFees();
+
                     break;
                 case "4":
                     schoolManagementMenu();
