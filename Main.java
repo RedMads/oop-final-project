@@ -446,18 +446,6 @@ public static void teacherMenu()
         System.out.flush();
     }
 
-
-    // Simple function to clear the screen when
-    // the user interact with menu options.
-    public static void clearScreen() {
-
-        // code to clear the screen
-        System.out.print("\033[H\033[2J");
-
-        // Reset the cursor to the top-left corner
-        System.out.flush();
-    }
-
     // crateSchool function creates and initialize components
     // of the school with values entered by user, and then
     // passes the objects to SchoolManagement object (current_school).
