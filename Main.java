@@ -235,6 +235,77 @@ public class Main {
             }
         }
     }
+    // Function to add a student to a class
+    public static void addStudentToClass(SchoolManagement school) {
+        int student_id = readInt("Enter student ID: ");
+        String class_id = readLine("Enter class ID: ");
+
+        // select student
+        Student student = null;
+        for (Student s : students) {
+            if (s.student_id == student_id) {
+                student = s;
+                break;
+            }
+        }
+
+        // select class room
+        Classroom classroom = null;
+        for (Classroom c : school.classrooms) {
+            if (c.class_id.equals(class_id)) {
+                classroom = c;
+                break;
+            }
+        }
+
+        if (student != null && classroom != null) {
+            classroom.student_count++;
+            System.out.println("Student " + student.student_name + " added to class " + classroom.class_name + " successfully.");
+        } else {
+            if (student == null) {
+                System.out.println("Student with ID " + student_id + " not found.");
+            }
+            if (classroom == null) {
+                System.out.println("Class with ID " + class_id + " not found.");
+            }
+        }
+    }
+
+    public static void assignTeacherToClass(SchoolManagement school) {
+        String teacher_id = readLine("Enter teacher ID: ");
+        String class_id = readLine("Enter class ID: ");
+
+        // select teacher
+        Employee teacher = null;
+        for (Employee e : school.employees) {
+            if (e.employee_id.equals(teacher_id)) {
+                teacher = e;
+                break;
+            }
+        }
+
+        // select class room
+        Classroom classroom = null;
+        for (Classroom c : school.classrooms) {
+            if (c.class_id.equals(class_id)) {
+                classroom = c;
+                break;
+            }
+        }
+
+        if (teacher != null && classroom != null) {
+            classroom.teacher_id = teacher.employee_id;
+            System.out.println("Teacher " + teacher.employee_name + " assigned to class " + classroom.class_name + " successfully.");
+        } else {
+            if (teacher == null) {
+                System.out.println("Teacher with ID " + teacher_id + " not found.");
+            }
+            if (classroom == null) {
+                System.out.println("Class with ID " + class_id + " not found.");
+            }
+        }
+    }
+
     // Function classMenu display a menu of Class option and process input.
  public static void classMenu() 
     {
@@ -253,11 +324,10 @@ public class Main {
 
             switch (option) {
                 case "1":
-                    System.out.println("Add student functionality...");
+                    addStudentToClass(current_school);
                     break;
                 case "2":
-
-                    System.out.println("Assign teacher functionality...");
+                    assignTeacherToClass(current_school);
                     break;
                 case "3":
                     for(Classroom c: current_school.classrooms)
