@@ -254,14 +254,6 @@ public class Main {
                     break;
                 case "2":
 
-                    for (Classroom c: current_school.classrooms) {
-                        c.classDetails();
-                        c.teacher_id = ""; // new teacher id.
-                    }
-                    // take user input
-                    // check if teacher id exists
-                    // assign teacher to the class room .
-                        
                     System.out.println("Assign teacher functionality...");
                     break;
                 case "3":
@@ -363,20 +355,11 @@ public static void teacherMenu()
 
             switch (option) {
                 case "1": 
-
-                    // list 
                     current_school.displayEmployeesDetailsByPrefix("EMP-");
                     
                     break;
                 case "2":
-                    // list all teachers.
-                    current_school.displayEmployeesDetailsByPrefix("EMP-");
-
-                    option = readLine("Enter teacher id: ");
-
-                    // todo: take user input and check if the provided id is corresponding to
-                    // real teacher or not if not display error message and let user try again.
-
+                    // all teachers recive their salaries.
                     for(Employee e: current_school.employees)
                         e.receiveSalary();
                     
@@ -406,24 +389,17 @@ public static void teacherMenu()
 
             switch (option) {
                 case "1":
-                    current_school.displayEmployeesDetailsByPrefix("STA-");
+                    
+                    // all staffs recive their salaries.
+                    for(Employee e: current_school.staffs)
+                        e.employeeDetails();
+
                     break;
                 case "2":
-                    current_school.displayEmployeesDetailsByPrefix("STA-");
-
-                    while (true) {
-
-                        int employee_id = readInt("choose Employee by id\n > ");
-
-                        if (employee_id > current_school.employees.size() || employee_id < 0){
-                            System.out.println("invaild Employee id !");
-                            continue;
-                        }
-                        else {
-                            current_school.employees.get(employee_id).receiveSalary();
-                            break;
-                        }
-                    }
+                    
+                    // all staffs recive their salaries.
+                    for(Employee e: current_school.staffs)
+                        e.receiveSalary();
 
                     break;
                 case "3":
@@ -566,11 +542,11 @@ public static void teacherMenu()
             double salary = readDouble("Salary: ");
 
             String department_id = readLine("Department ID: ");
-            String emp_id = "STA-" + (emp_counter++);
+            String emp_id = "STA-" + (i++);
 
             // create new staff object and pass it to school object.
             SupportStaff s = new SupportStaff(emp_id, name, salary, department_id, "");
-            school.addEmployee(s);
+            school.addStaff(s);
         }
 
         // Initialize bus infortmation
@@ -626,8 +602,8 @@ public static void teacherMenu()
     public static void main(String[] args) 
     { 
         // create school (initial setup)
-        SchoolManagement school = createSchool();
-        current_school = school;
+        current_school = createSchool();
+        
 
         // start interactive menu
         schoolManagementMenu();

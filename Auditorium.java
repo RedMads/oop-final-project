@@ -48,9 +48,9 @@ public class Auditorium {
 		
 		System.out.println("=".repeat(30));
         System.out.println("Seat Status for: " + this.event_name + " ");
-        System.out.println("Total Seats: t" + this.total_seats);
-        System.out.println("Occupied: t" + this.seats_occupied);
-        System.out.println("Available: t" + available_seats);
+        System.out.println("Total Seats: " + this.total_seats);
+        System.out.println("Occupied: " + this.seats_occupied);
+        System.out.println("Available: " + available_seats);
        	System.out.println("=".repeat(30));
 	}
 }

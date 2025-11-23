@@ -18,6 +18,7 @@ public class SchoolManagement {
 	ArrayList<Bus> buses = new ArrayList<>();
 
 	ArrayList<Employee> employees = new ArrayList<>();
+		ArrayList<Employee> staffs = new ArrayList<>();
 	ArrayList<Equipment> equipments = new ArrayList<>();
 
 	public SchoolManagement(String school_name, String address, String contact_number, String medium_of_study) {
@@ -67,6 +68,10 @@ public class SchoolManagement {
 
 	public void addEmployee(Employee employee) {
 		this.employees.add(employee);
+	}
+
+	public void addStaff(Employee employee) {
+		this.staffs.add(employee);
 	}
 
 	public void setNoticeBoard(NoticeBoard noticeBoard) {
