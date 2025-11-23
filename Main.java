@@ -216,7 +216,7 @@ public class Main {
         }
     }
     // Function classMenu display a menu of Class option and process input.
-  public static void classMenu() 
+public static void classMenu() 
 {
     clearScreen();
     System.out.println("=".repeat(30));
@@ -272,7 +272,7 @@ public class Main {
                 System.out.println("Teacher assigned successfully!");
                 System.out.println("Assign teacher functionality...");
                 break;
-            } // نهاية case "2"
+            } // نهاية الأقواس الخاصة بـ case "2"
 
             case "3":
                 for (Classroom c : current_school.classrooms)
@@ -285,9 +285,11 @@ public class Main {
 
             default:
                 System.out.println("Invalid option. Please select between 1 and 4.");
+                break;
         } 
     } 
 } 
+
 	
     // Function busMenu display a menu of Bus option and process input.
 	public static void busMenu() 
